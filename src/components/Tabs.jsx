@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import BudgetPage from "@/app/budgets/Page";
 import IncomePage from "@/app/income/Page";
 import CalculatorPage from "@/app/calculator/Page";
-import ExpensePage from "@/app/expenses/Page";
+import BudgetExpensePage from "@/app/budgets&expenses/Page";
 import PortfolioPage from "@/app/portfolio/Page";
 import ReportPage from "@/app/report/Page";
 import SettingsPage from "@/app/settings/Page";
@@ -24,24 +23,17 @@ function Tabs() {
   const tabs = [
     {
       tab: <ReportPage />,
-      tabName: "Report",
+      tabName: "AI Report",
       title: "View expense reports",
       icon: BarChart3,
       color: "text-blue-400",
     },
     {
-      tab: <ExpensePage />,
-      tabName: "Expenses",
+      tab: <BudgetExpensePage />,
+      tabName: "Budgets & Expenses",
       title: "Track all your expenses",
       icon: CreditCard,
       color: "text-red-400",
-    },
-    {
-      tab: <BudgetPage />,
-      tabName: "Budgets",
-      title: "Plan and review your budgets",
-      icon: Target,
-      color: "text-orange-400",
     },
     {
       tab: <IncomePage />,

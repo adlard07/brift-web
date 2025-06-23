@@ -48,7 +48,7 @@ export default function InsightsSection({ dummyData }) {
       <div className="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl border border-zinc-700/30 shadow-xl">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-white font-semibold text-lg flex items-center gap-2">
-            📈 Avg {trendType} Trends
+            Avg {trendType} Trends
           </h3>
           <select
             value={trendType}
@@ -99,7 +99,7 @@ export default function InsightsSection({ dummyData }) {
       {/* Pie Chart */}
       <div className="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl border border-zinc-700/30 shadow-xl">
         <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
-          🍰 Category Breakdown
+          Category Breakdown
         </h3>
         <ResponsiveContainer width="100%" height={220}>
           <PieChart>
@@ -139,7 +139,7 @@ export default function InsightsSection({ dummyData }) {
       {/* Upcoming Expenses */}
       <div className="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm p-6 rounded-2xl border border-zinc-700/30 shadow-xl">
         <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
-          ⏰ Upcoming Expenses
+          Upcoming Expenses
         </h3>
         <div className="space-y-3 max-h-[220px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800">
           {upcoming.length === 0 ? (

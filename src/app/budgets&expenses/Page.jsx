@@ -163,59 +163,78 @@ const dummyData = [
   },
 ];
 
-function ExpensePage() {
+function BudgetExpensePage() {
   const [selectedRange, setSelectedRange] = useState("Current quarter");
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Filter expense
-  const filteredData = dummyData.filter((item) => {
-    const matchesTitle = item.title
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || item.category === selectedCategory;
-    return matchesTitle && matchesCategory;
-  });
+  const filteredData = dummyData.filter((item) => {});
 
   const handleCreateExpense = () => {};
+  const handleCreateBudget = () => {};
 
   return (
     <div className="max-w-9xl mx-auto space-y-6">
-      {/* Add expense card */}
-      <button
-        className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
-          rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer ml-auto"
-        onClick={handleCreateExpense}
-      >
-        <p className="mr-2 text-lg">Add Expense</p>
-        <span className="text-2xl font-extralight">+</span>
-      </button>
+      <div className="flex gap-4 justify-end w-full">
+        {/* Add expense card */}
+        <button
+          className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
+    rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
+          onClick={handleCreateExpense}
+        >
+          <p className="mr-2 text-lg">Add Expense</p>
+          <span className="text-2xl font-extralight">+</span>
+        </button>
+        {/* Add budget card */}
+        <button
+          className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
+    rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
+          onClick={handleCreateBudget}
+        >
+          <p className="mr-2 text-lg">Add Budget</p>
+          <span className="text-2xl font-extralight">+</span>
+        </button>
+      </div>
+
+      {/* Chart Section */}
+      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-2xl p-6 shadow-2xl gap-6">
+        {/* Dropdown - aligned to the right */}
+        <select
+          value={selectedRange}
+          onChange={(e) => setSelectedRange(e.target.value)}
+          className="bg-zinc-800/80 backdrop-blur-sm text-white px-4 py-2 rounded-xl border border-zinc-600/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all duration-200 hover:bg-zinc-700/80 ml-auto"
+        >
+          <option>Current quarter</option>
+          <option>Current half</option>
+          <option>Current Year</option>
+          <option>Past 2 Years</option>
+          <option>Max</option>
+        </select>
+
+        <div className="flex gap-6 mt-6">
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
+                Overall Spending
+              </h2>
+            </div>
+            <OverallSpendingGraph dummyData={dummyData} />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
+                Budget Spending
+              </h2>
+            </div>
+            <BudgetExpensePage />
+          </div>
+        </div>
+      </div>
 
       {/* Stats Cards */}
       <div className="">
         <StatCards dummyData={dummyData} />
-      </div>
-
-      {/* Chart Section */}
-      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-2xl p-6 shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
-            Overall Spending
-          </h2>
-          <select
-            value={selectedRange}
-            onChange={(e) => setSelectedRange(e.target.value)}
-            className="bg-zinc-800/80 backdrop-blur-sm text-white px-4 py-2 rounded-xl border border-zinc-600/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all duration-200 hover:bg-zinc-700/80"
-          >
-            <option>Current quarter</option>
-            <option>Current half</option>
-            <option>Current Year</option>
-            <option>Past 2 Years</option>
-            <option>Max</option>
-          </select>
-        </div>
-        <OverallSpendingGraph dummyData={dummyData} />
       </div>
 
       {/* Transactions Table */}
@@ -256,4 +275,4 @@ function ExpensePage() {
   );
 }
 
-export default ExpensePage;
+export default BudgetExpensePage;
