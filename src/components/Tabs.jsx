@@ -3,7 +3,7 @@ import { useState } from "react";
 import BudgetPage from "@/app/budgets/Page";
 import IncomePage from "@/app/income/Page";
 import CalculatorPage from "@/app/calculator/Page";
-import ExpensePage from "@/app/transactions/Page";
+import ExpensePage from "@/app/expenses/Page";
 import PortfolioPage from "@/app/portfolio/Page";
 import ReportPage from "@/app/report/Page";
 import SettingsPage from "@/app/settings/Page";
@@ -31,8 +31,8 @@ function Tabs() {
     },
     {
       tab: <ExpensePage />,
-      tabName: "Transactions",
-      title: "Track all your transactions",
+      tabName: "Expenses",
+      title: "Track all your expenses",
       icon: CreditCard,
       color: "text-red-400",
     },
@@ -76,14 +76,14 @@ function Tabs() {
   return (
     <div className="min-h-screen bg-zinc px-6 py-4">
       {/* Top Header Row: Brift + Tabs */}
-      <div className="flex items-center gap-20 mb-6">
+      <div className="flex justify-between items-center gap-20 mb-6 w-full">
         {/* Logo/Title */}
         <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
           Brift
         </h1>
 
         {/* Tab Navigation */}
-        <div className="flex gap-1 p-1 bg-zinc-800/40 rounded-xl backdrop-blur-sm border border-zinc-700/50 overflow-x-auto">
+        <div className="flex gap-1 p-1 bg-zinc-800/40 rounded-xl backdrop-blur-sm border border-zinc-700/50 overflow-x-auto mx-auto">
           {tabs.map((tabObj) => {
             const isActive = tabObj.tabName === selectedTab;
             const IconComponent = tabObj.icon;
