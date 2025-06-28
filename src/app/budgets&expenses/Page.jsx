@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import OverallSpendingGraph from "./OverallSpending";
+import BudgetBarGraph from "./BudgetBarGraph"
 import ExpensesTable from "./ExpensesTables";
 import StatCards from "./StatCards";
 
@@ -177,19 +178,19 @@ function BudgetExpensePage() {
   return (
     <div className="max-w-9xl mx-auto space-y-6">
       <div className="flex gap-4 justify-end w-full">
-        {/* Add expense card */}
+        // Add expense card
         <button
           className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
-    rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
+          rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
           onClick={handleCreateExpense}
         >
           <p className="mr-2 text-lg">Add Expense</p>
           <span className="text-2xl font-extralight">+</span>
         </button>
-        {/* Add budget card */}
+        // Add budget card
         <button
           className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
-    rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
+          rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
           onClick={handleCreateBudget}
         >
           <p className="mr-2 text-lg">Add Budget</p>
@@ -227,7 +228,7 @@ function BudgetExpensePage() {
                 Budget Spending
               </h2>
             </div>
-            <BudgetExpensePage />
+            <BudgetBarGraph />
           </div>
         </div>
       </div>
