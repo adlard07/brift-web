@@ -2,7 +2,7 @@
 import { useState } from "react";
 import OverallSpendingGraph from "./OverallSpending";
 import BudgetBarGraph from "./BudgetBarGraph"
-import ExpensesTable from "./ExpensesTables";
+import ExpensesTable from "./ExpensesTable";
 import StatCards from "./StatCards";
 
 const dummyData = [
@@ -138,30 +138,6 @@ const dummyData = [
     month: "Jun",
     expense: 420,
   },
-  {
-    id: "EXP013",
-    title: "Car Insurance",
-    amount: 1200,
-    category: "Insurance",
-    date: "2025-07-10",
-    method: "Bank Transfer",
-    description: "Annual premium due",
-    month: "Jul",
-    expense: 1200,
-    isUpcoming: true,
-  },
-  {
-    id: "EXP014",
-    title: "Vacation Booking",
-    amount: 3000,
-    category: "Leisure",
-    date: "2025-08-01",
-    method: "Credit Card",
-    description: "Advance hotel payment",
-    month: "Aug",
-    expense: 3000,
-    isUpcoming: true,
-  },
 ];
 
 function BudgetExpensePage() {
@@ -177,8 +153,8 @@ function BudgetExpensePage() {
 
   return (
     <div className="max-w-9xl mx-auto space-y-6">
+      {/*Create expense*/}
       <div className="flex gap-4 justify-end w-full">
-        // Add expense card
         <button
           className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
           rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
@@ -187,67 +163,54 @@ function BudgetExpensePage() {
           <p className="mr-2 text-lg">Add Expense</p>
           <span className="text-2xl font-extralight">+</span>
         </button>
-        // Add budget card
-        <button
-          className="flex items-center justify-center bg-zinc-800/30 backdrop-blur-sm border border-zinc-700/50 
-          rounded-xl px-6 py-2 hover:scale-110 transition-all duration-300 hover:bg-zinc-800 ease-out hover:cursor-pointer"
-          onClick={handleCreateBudget}
-        >
-          <p className="mr-2 text-lg">Add Budget</p>
-          <span className="text-2xl font-extralight">+</span>
-        </button>
       </div>
 
       {/* Chart Section */}
-      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-2xl p-6 shadow-2xl gap-6">
-        {/* Dropdown - aligned to the right */}
-        <select
-          value={selectedRange}
-          onChange={(e) => setSelectedRange(e.target.value)}
-          className="bg-zinc-800/80 backdrop-blur-sm text-white px-4 py-2 rounded-xl border border-zinc-600/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all duration-200 hover:bg-zinc-700/80 ml-auto"
-        >
-          <option>Current quarter</option>
-          <option>Current half</option>
-          <option>Current Year</option>
-          <option>Past 2 Years</option>
-          <option>Max</option>
-        </select>
+      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-xl 
+        overflow-hidden shadow-2xl">
+        <div className="flex items-center px-6 py-2">
+          <h2 className="text-md text-white">
+            Overall Trend
+          </h2>
+          <select
+            value={selectedRange}
+            onChange={(e) => setSelectedRange(e.target.value)}
+            className="bg-zinc-800/80 backdrop-blur-sm text-md text-white py-2 px-1 rounded-sm 
+            border border-zinc-600/50 focus:outline-none hover:bg-zinc-700/80 ml-auto"
+          >
+            <option>Current quarter</option>
+            <option>Current half</option>
+            <option>Current Year</option>
+            <option>Past 2 Years</option>
+            <option>Max</option>
+          </select>
+        </div>
 
-        <div className="flex gap-6 mt-6">
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
-                Overall Spending
-              </h2>
-            </div>
+        <div className="flex flex-wrap gap-6 border border-zinc-700/30 pt-4">
+          <div className="flex-1 min-w-[300px]">
             <OverallSpendingGraph dummyData={dummyData} />
           </div>
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
-                Budget Spending
-              </h2>
-            </div>
+          <div className="flex-1 min-w-[300px]">
             <BudgetBarGraph />
           </div>
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="">
-        <StatCards dummyData={dummyData} />
-      </div>
+
 
       {/* Transactions Table */}
-      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="p-6 border-b border-zinc-700/50 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <h2 className="text-2xl font-semibold text-white">Expenses</h2>
+      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-700/50 rounded-2xl 
+        overflow-hidden shadow-2xl">
+        <div className="px-6 py-2 border-b border-zinc-700/50 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h2 className="text-md font-semibold font-light text-white">
+            Expenses
+          </h2>
 
           <div className="flex gap-3 flex-wrap">
             {/* Search bar */}
             <input
               type="text"
-              placeholder="Search by title..."
+              placeholder="Search expense..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               className="bg-zinc-800 text-white px-10 py-2 rounded-lg border border-zinc-600/50 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
@@ -268,10 +231,18 @@ function BudgetExpensePage() {
             </select>
           </div>
         </div>
-        <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
+        <div className="pb-4">
           <ExpensesTable dummyData={dummyData} />
         </div>
       </div>
+
+
+      {/* Stats Cards */}
+      {/*<div className="">
+        <StatCards dummyData={dummyData} />
+      </div>
+      */}
+
     </div>
   );
 }

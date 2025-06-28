@@ -1,8 +1,8 @@
-function CalculatorPage () {
+function ToolsPage () {
     return (
         <div>
             This is the Calculator Page
         </div>
     )
 }
-export default CalculatorPage;
+export default ToolsPage;

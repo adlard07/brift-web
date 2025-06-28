@@ -10,7 +10,7 @@ import {
 
 const OverallSpendingGraph = ({ dummyData }) => {
   return (
-    <div className="h-[300px] bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 rounded-xl p-6 border border-zinc-700/30">
+    <div className="h-[300px] bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 p-6 ">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={dummyData}>
           <defs>

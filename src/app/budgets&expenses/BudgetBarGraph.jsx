@@ -52,7 +52,6 @@ const BudgetBarGraph = () => {
         >
           <LabelList
             dataKey="budget"
-            position="top"
             content={({ x, y, value }) => (
               <text x={x} y={y - 6} fill="white" fontSize={13} textAnchor="middle">
                 {value}
@@ -65,13 +64,12 @@ const BudgetBarGraph = () => {
         <Bar
           dataKey="actual"
           fill="red"
-          name="Actual Spend"
+          name="Spent"
           barSize={25}
           radius={[4, 4, 0, 0]}
         >
           <LabelList
             dataKey="actual"
-            position="top"
             content={({ x, y, value }) => (
               <text x={x} y={y - 6} fill="white" fontSize={13} textAnchor="middle">
                 {value}

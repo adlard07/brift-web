@@ -1,11 +1,10 @@
 "use client";
-
-import Tabs from "@/components/Tabs";
+import App from "@/app/App";
 
 export default function Home() {
   return (
     <div>
-      <Tabs />
+      <App />
     </div>
   );
 }
