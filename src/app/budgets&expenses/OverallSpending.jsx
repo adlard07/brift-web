@@ -10,7 +10,7 @@ import {
 
 const OverallSpendingGraph = ({ dummyData }) => {
   return (
-    <div className="h-[300px] bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 p-6 ">
+    <div className="h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={dummyData}>
           <defs>
@@ -19,7 +19,7 @@ const OverallSpendingGraph = ({ dummyData }) => {
               <stop offset="95%" stopColor="#FE8F34" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" opacity={0.3} />
           <XAxis
             dataKey="month"
             stroke="#9CA3AF"

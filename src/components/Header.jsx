@@ -1,61 +1,70 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/app/context/myContext";
+import { Sun, Moon, PanelLeft } from "lucide-react";
 
-function Header() {
-  const {
-    tabs, 
-    selectedTab, 
-    setSelectedTab
-  } = useContext(UserContext)
+function Sidebar() {
+  const { tabs, supportTabs, selectedTab, setSelectedTab } = useContext(UserContext);
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
+  useEffect(() => {
+    if (isMobile) setIsExpanded(false);
+  }, [isMobile]);
+
+  const toggleSidebar = () => setIsExpanded((prev) => !prev);
+  const toggleTheme = () => setIsDarkMode((prev) => !prev);
+
+  const renderTabButton = (tabObj, isActive) => {
+    const Icon = tabObj.icon;
+    return (
+      <button
+        key={tabObj.tabName}
+        title={!isExpanded ? tabObj.title : ""}
+        className={`flex items-center gap-3 px-3 py-2 mb-1 rounded-md w-full text-left
+        ${isActive ? "bg-blue-500 text-white" : "hover:bg-gray-700/20 text-gray-400"}`}
+        onClick={() => {
+          setSelectedTab(tabObj.tabName);
+          if (isMobile) setIsExpanded(false); // auto-collapse on mobile
+        }}
+      >
+        <Icon className="w-5 h-5" />
+        {isExpanded && <span className="text-sm truncate">{tabObj.tabName}</span>}
+      </button>
+    );
+  };
 
   return (
-    <div className="absolute bg-[#2A2A2A] px-6 py-1/5 border-b-1 border-gray-900 w-full">
-      {/*Header*/}
-      <div className="flex justify-between items-center gap-20 w-full">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-zinc-300 bg-clip-text 
-          text-transparent">
-          brift 
-          <span className="text-orange-600">.</span>
-        </h1>
-
-        {/* Tab Navigation */}
-        <div className="flex gap-2">
-          {tabs.map((tabObj) => {
-            const isActive = tabObj.tabName === selectedTab;
-            const IconComponent = tabObj.icon;
-
-            return (
-              <button
-                key={tabObj.tabName}
-                title={tabObj.title}
-                className={`flex items-center gap-2 px-6 py-4 rounded-xs transition-all duration-300 
-                ease-out whitespace-nowrap min-w-fit ${
-                  isActive
-                    ? "bg-zinc-700/25 text-white shadow-lg shadow-zinc-900/25"
-                    : "text-zinc-400 hover:text-white hover:bg-zinc-700/50"
-                } hover:cursor-pointer`}
-                onClick={() => setSelectedTab(tabObj.tabName)}
-              >
-                <IconComponent
-                  className={`w-4 h-4 ${isActive ? "text-orange-500" : ""}`}
-                />
-                <span className="text-sm">{tabObj.tabName}</span>
-              </button>
-            );
-          })}
+    <aside
+      className={`h-screen flex flex-col justify-between shadow-md transition-all duration-300
+        ${isDarkMode ? "bg-black text-white" : "bg-white text-black"}
+        ${isExpanded ? "w-64" : "w-20"} p-4 fixed md:static z-50`}
+    >
+      {/* Top Section */}
+      <div>
+        {/* Branding and Toggle */}
+        <div className="flex items-center justify-start mb-8 px-2">
+          <button title={"Open"} onClick={toggleSidebar} className="text-white hover:bg-gray-500 hover:rounded">
+            <PanelLeft />
+          </button>
         </div>
 
-        <h1 className="text-xl font-bold bg-gradient-to-r from-white to-zinc-300 bg-clip-text 
-          text-transparent">
-          Profile
-          <span className="text-orange-600">.</span>
-        </h1>
+
+        {/* Main Tabs */}
+        <div>
+          {isExpanded && <p className="text-xs font-semibold mb-2">MENU</p>}
+          {tabs.map((tab) => renderTabButton(tab, tab.tabName === selectedTab))}
+        </div>
+
+        {/* Support Tabs */}
+        <div className="mt-6">
+          {isExpanded && <p className="text-xs font-semibold mb-2">SUPPORT</p>}
+          {supportTabs.map((tab) => renderTabButton(tab, tab.tabName === selectedTab))}
+        </div>
       </div>
-    </div>
+    </aside>
   );
 }
 
-export default Header;
- 
+export default Sidebar;

@@ -1,28 +1,25 @@
 import { useContext } from "react";
-import Header from "@/components/Header";
-import MyContext, { UserContext } from "@/app/context/myContext";
+import { UserContext } from "@/app/context/myContext";
+import Sidebar from "@/components/Header"; // assuming Sidebar is here
 
-function MainContent() {
-	const { tabs, selectedTab } = useContext(UserContext);
+export default function AppLayout() {
+  const { tabs, supportTabs, selectedTab } = useContext(UserContext);
 
-	return (
-		<div className="">
-			<Header />
-			<div className="pt-10 bg-[#1A1A1A] min-h-screen">
-				<div className="transition-all duration-500 ease-out p-6">
-					{tabs.find((tabObj) => tabObj.tabName === selectedTab)?.tab}
-				</div>
-			</div>
-		</div>
-	);
+  const allTabs = [...tabs, ...supportTabs];
+  const activeTab = allTabs.find((tab) => tab.tabName === selectedTab);
+
+  return (
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 overflow-auto">
+        <div className="px-4 w-full">
+          <h3 className="text-2xl">
+            brift
+        	<span className="text-4xl text-orange-500">.</span>
+          </h3>
+        {activeTab?.tab}
+        </div>
+      </main>
+    </div>
+  );
 }
-
-function App() {
-	return (
-		<MyContext>
-			<MainContent />
-		</MyContext>
-	);
-}
-
-export default App;

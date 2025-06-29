@@ -1,10 +1,12 @@
 "use client";
-import App from "@/app/App";
+import AppLayout from "@/app/App";
+import MyContext from "@/app/context/myContext";
+
 
 export default function Home() {
   return (
-    <div>
-      <App />
-    </div>
+    <MyContext>
+      <AppLayout />
+    </MyContext>
   );
 }
