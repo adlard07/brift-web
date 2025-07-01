@@ -13,11 +13,13 @@ export default function AppLayout() {
       <Sidebar />
       <main className="flex-1 overflow-auto">
         <div className="px-4 w-full">
-          <h3 className="text-2xl">
+          <h3 className="text-3xl">
             brift
         	<span className="text-4xl text-orange-500">.</span>
           </h3>
-        {activeTab?.tab}
+          <div className="py-5 pb-5">
+            {activeTab?.tab}
+          </div>
         </div>
       </main>
     </div>
